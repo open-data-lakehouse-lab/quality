@@ -1,0 +1,1 @@
+{"dataset_id": "meteocat-weather", "source": "meteocat", "resource": "measured-variable", "record_type": "measurement", "payload": {"station_id": "1", "value": 25.5}, "processing_metadata": {"timestamp": "2026-06-04T21:09:00"}}

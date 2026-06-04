@@ -1,0 +1,1 @@
+{"dataset_id": "meteocat-weather", "source": "meteocat", "resource": "variables-metadata", "record_type": "metadata", "payload": {"id": "METEO", "description": "Temperature"}, "processing_metadata": {"timestamp": "2026-06-04T21:09:00"}}

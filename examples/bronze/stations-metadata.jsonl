@@ -1,0 +1,1 @@
+{"dataset_id": "meteocat-weather", "source": "meteocat", "resource": "stations-metadata", "record_type": "metadata", "payload": {"id": "1", "name": "Fake Station 1"}, "processing_metadata": {"timestamp": "2026-06-04T21:09:00"}}
