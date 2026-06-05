@@ -9,7 +9,7 @@ class QualityCheckResult(BaseModel):
 
 class QualityReport(BaseModel):
     dataset: str
-    resource: str
+    resource: str  # This represents either resource (bronze) or entity (silver)
     results: List[QualityCheckResult]
     
     @property

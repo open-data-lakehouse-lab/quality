@@ -1,0 +1,2 @@
+{"dataset_id": "meteocat-weather", "source": "meteocat", "entity": "stations", "natural_key": "ST1", "attributes": {"name": "Station 1", "altitude": 100}, "source_payload": {"id": "ST1", "nom": "Station 1"}, "processing_metadata": {"timestamp": "2024-01-01T00:00:00Z"}}
+{"dataset_id": "meteocat-weather", "source": "meteocat", "entity": "stations", "natural_key": null, "attributes": {"name": "Station 2", "altitude": 200}, "source_payload": {"id": "ST2", "nom": "Station 2"}, "processing_metadata": {"timestamp": "2024-01-01T00:00:00Z"}}

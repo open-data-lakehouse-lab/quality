@@ -1,0 +1,1 @@
+{"dataset_id": "meteocat-weather", "source": "meteocat", "entity": "variables", "natural_key": "VAR1", "attributes": {"name": "Temperature", "unit": "Celsius"}, "source_payload": {"id": "VAR1", "nom": "Temperature"}, "processing_metadata": {"timestamp": "2024-01-01T00:00:00Z"}}

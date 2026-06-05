@@ -7,13 +7,16 @@ The `quality` repository is responsible for local data quality validation in the
 This repository provides lightweight, local-first quality checks for:
 - Landing JSON files.
 - Bronze JSONL files.
-- Minimal bronze record structure.
+- Silver JSONL files.
+- Minimal bronze/silver record structure.
 
 ## Current Scope
 
 - **Landing quality**: Verify file existence, valid JSON format, and non-empty payloads.
 - **Bronze quality**: Verify file existence, valid JSONL format, and presence of mandatory bronze fields.
+- **Silver quality**: Verify file existence, valid JSONL format, mandatory silver fields, and entity consistency.
 - **Meteocat resources**: Support for `stations-metadata`, `variables-metadata`, and `measured-variable`.
+- **Meteocat entities**: Support for `stations`, `variables`, and `measurements`.
 
 Checks are intentionally minimal and local-first. They do not require network access or API keys.
 
@@ -42,6 +45,12 @@ odl-quality check bronze \
   --dataset meteocat-weather \
   --resource stations-metadata \
   --input-path ./examples/bronze/stations-metadata.jsonl
+
+# Check silver data
+odl-quality check silver \
+  --dataset meteocat-weather \
+  --entity stations \
+  --input-path ./examples/silver/stations.jsonl
 ```
 
 ### Run validation

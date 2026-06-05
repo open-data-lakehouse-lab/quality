@@ -18,6 +18,7 @@ Every bronze record must contain:
 - **Record presence**: Verifies that the file contains at least one record.
 - **Minimal structure**: Validates the presence of mandatory bronze fields in every record.
 
-## Future Work
+## Related documentation
 
-- **Silver/Gold quality rules**: Business-level validation and schema enforcement will be added in later stages.
+- [Landing Quality](landing-quality.md)
+- [Silver Quality](silver-quality.md)

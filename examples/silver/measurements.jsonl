@@ -1,0 +1,1 @@
+{"dataset_id": "meteocat-weather", "source": "meteocat", "entity": "measurements", "natural_key": "M1", "attributes": {"station_id": "ST1", "variable_id": "VAR1", "value": 25.5}, "source_payload": {"id": "M1", "station": "ST1", "value": 25.5}, "processing_metadata": {"timestamp": "2024-01-01T00:00:00Z"}}
