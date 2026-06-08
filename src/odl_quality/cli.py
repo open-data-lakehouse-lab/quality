@@ -20,13 +20,18 @@ def check(
     resource: Optional[str] = typer.Option(None, "--resource", help="Resource name (for landing/bronze)"),
     entity: Optional[str] = typer.Option(None, "--entity", help="Entity name (for silver)"),
     input_path: Path = typer.Option(..., "--input-path", help="Path to the input file"),
+    catalog_path: Optional[Path] = typer.Option(None, "--catalog-path", help="Path to the datasets catalog"),
+    use_contract: bool = typer.Option(False, "--use-contract", help="Enable contract/schema validation"),
 ) -> None:
     """Run quality checks for a specific stage."""
     if stage == "landing":
         if not resource:
             typer.echo("Error: --resource is required for landing stage")
             raise typer.Exit(code=1)
-        report = check_landing(dataset, resource, input_path)
+        if use_contract and not catalog_path:
+            typer.echo("Error: --catalog-path is required when --use-contract is enabled")
+            raise typer.Exit(code=1)
+        report = check_landing(dataset, resource, input_path, use_contract=use_contract, catalog_path=catalog_path)
     elif stage == "bronze":
         if not resource:
             typer.echo("Error: --resource is required for bronze stage")

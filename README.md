@@ -12,9 +12,10 @@ This repository provides lightweight, local-first quality checks for:
 
 ## Current Scope
 
-- **Landing quality**: Verify file existence, valid JSON format, and non-empty payloads.
+- **Landing quality**: Verify file existence, valid JSON format, non-empty payloads, and optional contract/schema validation.
 - **Bronze quality**: Verify file existence, valid JSONL format, and presence of mandatory bronze fields.
 - **Silver quality**: Verify file existence, valid JSONL format, mandatory silver fields, and entity consistency.
+- **Contract-based validation**: Optional landing payload validation against draft contracts and JSON schemas from `datasets-catalog`.
 - **Meteocat resources**: Support for `stations-metadata`, `variables-metadata`, and `measured-variable`.
 - **Meteocat entities**: Support for `stations`, `variables`, and `measurements`.
 
@@ -39,6 +40,14 @@ odl-quality check landing \
   --dataset meteocat-weather \
   --resource stations-metadata \
   --input-path ./examples/landing/stations-metadata.json
+
+# Check landing data with contract validation
+odl-quality check landing \
+  --dataset meteocat-weather \
+  --resource stations-metadata \
+  --input-path ./examples/landing/stations-metadata.json \
+  --catalog-path ../datasets-catalog \
+  --use-contract
 
 # Check bronze data
 odl-quality check bronze \

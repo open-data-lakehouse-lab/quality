@@ -1,9 +1,18 @@
 from pathlib import Path
+from typing import Optional
 from odl_quality.models.result import QualityCheckResult, QualityReport
 from odl_quality.readers.json_reader import read_json
 from odl_quality.validation.resources import validate_resource
+from odl_quality.contracts.catalog_contract_loader import CatalogContractLoader
+from odl_quality.contracts.schema_validator import SchemaValidator
 
-def check_landing(dataset: str, resource: str, input_path: Path) -> QualityReport:
+def check_landing(
+    dataset: str, 
+    resource: str, 
+    input_path: Path,
+    use_contract: bool = False,
+    catalog_path: Optional[Path] = None
+) -> QualityReport:
     """Run landing quality checks."""
     results = []
     
@@ -35,6 +44,7 @@ def check_landing(dataset: str, resource: str, input_path: Path) -> QualityRepor
         return QualityReport(dataset=dataset, resource=resource, results=results)
 
     # Check valid JSON and not empty
+    data = None
     try:
         data = read_json(input_path)
         results.append(QualityCheckResult(
@@ -55,5 +65,40 @@ def check_landing(dataset: str, resource: str, input_path: Path) -> QualityRepor
             passed=False,
             message=f"Failed to parse JSON: {e}"
         ))
+
+    # Contract validation (opt-in)
+    if use_contract:
+        if not catalog_path:
+            results.append(QualityCheckResult(
+                check_name="contract_validation",
+                passed=False,
+                message="--catalog-path is required when --use-contract is enabled"
+            ))
+        else:
+            try:
+                loader = CatalogContractLoader(catalog_path)
+                _, schema_path = loader.load_contract(dataset, resource)
+                results.append(QualityCheckResult(
+                    check_name="contract_found",
+                    passed=True,
+                    message=f"Contract and schema found in catalog for {resource}"
+                ))
+                
+                if data is not None:
+                    validator = SchemaValidator()
+                    validation_result = validator.validate(data, schema_path)
+                    results.append(validation_result)
+                else:
+                    results.append(QualityCheckResult(
+                        check_name="schema_validation",
+                        passed=False,
+                        message="Skipping schema validation because JSON is invalid"
+                    ))
+            except Exception as e:
+                results.append(QualityCheckResult(
+                    check_name="contract_found",
+                    passed=False,
+                    message=f"Contract validation error: {e}"
+                ))
 
     return QualityReport(dataset=dataset, resource=resource, results=results)

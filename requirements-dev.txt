@@ -3,3 +3,4 @@ ruff
 mypy
 pydantic
 typer
+jsonschema
